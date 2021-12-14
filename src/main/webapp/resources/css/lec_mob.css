@@ -1,0 +1,54 @@
+.wrap_user>a {
+	display: none;
+}
+
+.wrap_user>i {
+	display: block;
+	font-size: 5vw;
+}
+
+.snb {
+	/* 브라우저가 요소를 아예 랜더링하지 않음
+		   보이지도 않고, 영역도 차지 하지 않음 */
+	display: none;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 35vw;
+	background-image: url("../image/main_banner.jpg");
+	background-size: cover;
+	background-clip: content-box;
+}
+
+.wrap_book>p {
+	font-size: 3vw;
+	font-weight: bolder;
+	margin-bottom: 1%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	padding: 10px 0 10px 0;
+}
+
+.wrap_book-line {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.wrap_book-line>div {
+	margin-top: 10px;
+	width: 40%;
+}
+
+.wrap_book-line p {
+	font-size: 2vw;
+	font-weight: bolder;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 5px;
+}

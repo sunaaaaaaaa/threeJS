@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/resources/css/reset.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/all.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_web.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_mob.css" type="text/css" rel="stylesheet" media="screen and (max-width:600px)">
+<script type="text/javascript" src="/resources/js/three.js"></script>
+<script type="text/javascript" src="/resources/js/OrbitControls.js"></script>
+<script type="text/javascript" src="/resources/js/MTLLoader.js"></script>
+<script type="text/javascript" src="/resources/js/OBJLoader.js"></script>
+<script type="text/javascript" src="/resources/js/FontLoader.js"></script>
+</head>
+<body>
+   <div class="header">
+      <div class="wrap_logo">
+         <a class="logo">PCLASS</a>
+      </div>
+      <form class="frm_top-search">
+         <input class="inp_search" type="text" placeholder="검색어를 입력하세요">
+         <i class="fas fa-search"></i>
+      </form>
+      <div class="wrap_user">
+         <a>로그인</a>
+         <a>회원가입</a>
+         <i class="fas fa-bars"></i>
+      </div>
+   </div>
+   <div class="snb">
+      <p>Menu</p>
+      <ul>
+         <li>
+            <i class="fas fa-search"></i>
+            <p>도서검색</p>
+         </li>
+         <li>
+            <i class="fas fa-cart-plus"></i>
+            <p>장바구니</p>
+         </li>
+         <li>
+            <i class="fas fa-clipboard-list"></i>
+            <p>공지사항</p>
+         </li>
+         <li>
+            <i class="fas fa-user-friends"></i>
+            <p>About Us</p>
+         </li>
+      </ul>
+   </div>
+   
+   <div class="contents">
+      <div class="main">
+         
+      </div>
+      <div class="wrap_book">
+         <p>최근 인기 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>스테디셀러</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>새로 들어온 책</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>최근 대출 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer"></div>
+   
+<script type="text/javascript" src="/resources/js/ThreeJSBoot.js"></script>
+<script type="text/javascript">
+
+let boot =new ThreeJSBoot();
+let mainDiv = document.querySelector('.main');
+boot.createStage(mainDiv);
+
+//구조분해어쩌고 :알아서 변수선언해줌
+let {scene,renderer,light,camera} = boot;
+//let scene = boot.scene;
+//let renderer = boot.renderer;
+//let light =boot.light;
+//let camera = boot.camera;
+
+let txLoader = new THREE.TextureLoader();
+
+//태양
+const sun = boot.createObject3D(new THREE.SphereGeometry(2,30,30),
+								{map:txLoader.load('resources/texture/flw.jpg')});
+scene.add( sun );
+
+//지구
+const earth = boot.createObject3D(new THREE.SphereGeometry(1,30,30),
+								{map:txLoader.load('resources/texture/earth.png')});
+earth.position.x = -7;
+sun.add( earth );
+
+//달
+const moon = boot.createObject3D(new THREE.SphereGeometry(0.15,30,30),
+								{map:txLoader.load('resources/texture/moon.png')});
+moon.position.x = -2;
+earth.add( moon );
+
+//해왕성
+const neptune = boot.createObject3D(new THREE.SphereGeometry(1.3,30,30),
+								{map:txLoader.load('resources/texture/neptunus.png')});
+neptune.position.x = -10;
+sun.add( neptune );
+
+//해왕성고리
+const ring = boot.createObject3D(new THREE.SphereGeometry(2,30,30),
+		txLoader.load('resources/texture/ring.png'));
+ring.rotation.x = 4.5;
+neptune.add( ring );
+
+
+//우주선
+scene.background = new THREE.CubeTextureLoader()
+	.setPath( 'textures/cubeMaps/' )
+	.load( ['px.png','nx.png','py.png','ny.png','pz.png','nz.png'] );
+
+const mtlUrl ='resources/models/apollo/apollo.mtl';
+const objUrl ='resources/models/apollo/apollo.obj';
+
+//async는 then으로 불러서 씀
+boot.createObjectFrom3DModel(mtlUrl,objUrl).then((obj)=>{
+	obj.position.x = 8;
+	neptune.add(obj);
+	});
+
+//글씨
+let font = 'resources/threejs-font/helvetiker_regular.typeface.json';
+const color = 0x006699;
+const message = " SUNA \n SPACE";
+boot.createLineText(font,color,message,10)
+.then(e => {scene.add(e.text);
+			scene.add(e.lineText);
+});
+
+
+
+//동작
+function animate() {
+   requestAnimationFrame( animate );
+   earth.rotation.y += 0.03;
+   moon.rotation.y += 0.01;
+   moon.rotation.x += 0.01;
+   sun.rotation.y += 0.01;
+   neptune.rotation.y += 0.01;
+   light.intensity = light.intensity > 1 ? light.intensity -=0.005:light.intensity +=0.005;
+   renderer.render( scene, camera );
+}
+animate();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

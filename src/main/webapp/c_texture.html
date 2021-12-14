@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/resources/css/reset.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/all.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_web.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_mob.css" type="text/css" rel="stylesheet" media="screen and (max-width:600px)">
+<script type="text/javascript" src="/resources/js/three.js"></script>
+
+</head>
+<body>
+   <div class="header">
+      <div class="wrap_logo">
+         <a class="logo">PCLASS</a>
+      </div>
+      <form class="frm_top-search">
+         <input class="inp_search" type="text" placeholder="검색어를 입력하세요">
+         <i class="fas fa-search"></i>
+      </form>
+      <div class="wrap_user">
+         <a>로그인</a>
+         <a>회원가입</a>
+         <i class="fas fa-bars"></i>
+      </div>
+   </div>
+   <div class="snb">
+      <p>Menu</p>
+      <ul>
+         <li>
+            <i class="fas fa-search"></i>
+            <p>도서검색</p>
+         </li>
+         <li>
+            <i class="fas fa-cart-plus"></i>
+            <p>장바구니</p>
+         </li>
+         <li>
+            <i class="fas fa-clipboard-list"></i>
+            <p>공지사항</p>
+         </li>
+         <li>
+            <i class="fas fa-user-friends"></i>
+            <p>About Us</p>
+         </li>
+      </ul>
+   </div>
+   
+   <div class="contents">
+      <div class="main">
+         
+      </div>
+      <div class="wrap_book">
+         <p>최근 인기 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>스테디셀러</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>새로 들어온 책</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>최근 대출 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer"></div>
+   
+
+
+<script type="text/javascript">
+
+let mainDiv = document.querySelector('.main');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, mainDiv.clientWidth / mainDiv.clientHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( mainDiv.clientWidth, mainDiv.clientHeight);
+document.querySelector('.main').appendChild( renderer.domElement );
+
+const skyColor = 0xB1E1FF;  // 하늘색
+const groundColor = 0xB97A20;  // 오렌지 브라운
+const intensity = 1;
+const color = 0xFFFFFF;
+let light = new THREE.DirectionalLight(color,0.01);
+light.position.set(5, 5, 5);
+light.target.position.set(-1, 0, 0);
+scene.add(light);
+
+const x = 0, y = 0;
+const heartShape = new THREE.Shape();
+heartShape.moveTo( x + 5, y + 5 );
+heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
+heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, y + 7 );
+heartShape.bezierCurveTo( x - 6, y + 11, x - 3, y + 15.4, x + 5, y + 19 );
+heartShape.bezierCurveTo( x + 12, y + 15.4, x + 16, y + 11, x + 16, y + 7 );
+heartShape.bezierCurveTo( x + 16, y + 7, x + 16, y, x + 10, y );
+heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, x + 5, y + 5 );
+
+const geometry = new THREE.ShapeGeometry(heartShape);
+const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+
+
+const geometry2 = new THREE.RingGeometry( 3, 5, 32 );
+const material2 = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+const mesh = new THREE.Mesh( geometry2, material2 );
+mesh.position.x = 30;
+scene.add( mesh );
+
+const geometry3 = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+const material3 = new THREE.MeshPhongMaterial( { color: 0xffff00} );
+const torusKnot = new THREE.Mesh( geometry3, material3 );
+torusKnot.position.x = -30;
+scene.add( torusKnot );
+
+
+camera.position.z = 50;
+
+function animate() {
+   requestAnimationFrame( animate );
+   cube.rotation.x += 0.01;
+   cube.rotation.y += 0.01;
+   mesh.rotation.x += 0.01;
+   mesh.rotation.y += 0.01;
+   torusKnot.rotation.x += 0.01;
+   torusKnot.rotation.y += 0.01;
+   light.intensity = light.intensity > 5 ? light.intensity -=0.005:light.intensity +=0.005;
+   renderer.render( scene, camera );
+}
+animate();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

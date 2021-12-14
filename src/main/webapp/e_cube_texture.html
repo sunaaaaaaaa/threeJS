@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/resources/css/reset.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/all.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_web.css" type="text/css" rel="stylesheet">
+<link href="/resources/css/lec_mob.css" type="text/css" rel="stylesheet" media="screen and (max-width:600px)">
+<script type="text/javascript" src="/resources/js/three.js"></script>
+<script type="text/javascript" src="/resources/js/OrbitControls.js"></script>
+
+</head>
+<body>
+   <div class="header">
+      <div class="wrap_logo">
+         <a class="logo">PCLASS</a>
+      </div>
+      <form class="frm_top-search">
+         <input class="inp_search" type="text" placeholder="검색어를 입력하세요">
+         <i class="fas fa-search"></i>
+      </form>
+      <div class="wrap_user">
+         <a>로그인</a>
+         <a>회원가입</a>
+         <i class="fas fa-bars"></i>
+      </div>
+   </div>
+   <div class="snb">
+      <p>Menu</p>
+      <ul>
+         <li>
+            <i class="fas fa-search"></i>
+            <p>도서검색</p>
+         </li>
+         <li>
+            <i class="fas fa-cart-plus"></i>
+            <p>장바구니</p>
+         </li>
+         <li>
+            <i class="fas fa-clipboard-list"></i>
+            <p>공지사항</p>
+         </li>
+         <li>
+            <i class="fas fa-user-friends"></i>
+            <p>About Us</p>
+         </li>
+      </ul>
+   </div>
+   
+   <div class="contents">
+      <div class="main">
+         
+      </div>
+      <div class="wrap_book">
+         <p>최근 인기 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>스테디셀러</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>새로 들어온 책</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>최근 대출 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer"></div>
+   
+
+
+<script type="text/javascript">
+
+let mainDiv = document.querySelector('.main');
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( mainDiv.clientWidth, mainDiv.clientHeight);
+document.querySelector('.main').appendChild( renderer.domElement );
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, mainDiv.clientWidth / mainDiv.clientHeight, 0.1, 1000 );
+const controls = new THREE.OrbitControls(camera, renderer.domElement );
+controls.update();
+
+
+const color = 0xFFFFFF;
+let light = new THREE.DirectionalLight(color,1);
+light.position.set(-1, 1, 1);
+scene.add(light);
+
+const textureloader = new THREE.TextureLoader();
+
+const sungeo = new THREE.SphereGeometry(2,30,30);
+const sunTexture = textureloader.load('resources/texture/flw.jpg');
+const sunMetereial = new THREE.MeshPhongMaterial({
+	map: sunTexture,
+	});
+const sun = new THREE.Mesh( sungeo, sunMetereial );
+scene.add( sun );
+
+
+const earthgeo = new THREE.SphereGeometry(1,30,30);
+const earthTexture = textureloader.load('resources/texture/earth.png');
+const earthMetereial = new THREE.MeshPhongMaterial({
+	map: earthTexture,
+	});
+const earth = new THREE.Mesh(earthgeo, earthMetereial);
+earth.position.x = -7;
+sun.add( earth );
+
+
+const moongeo = new THREE.SphereGeometry(0.15,30,30);
+const moonTexture = textureloader.load('resources/texture/moon.png');
+const moonMetereial = new THREE.MeshPhongMaterial({
+	map: moonTexture,
+	});
+const moon = new THREE.Mesh( moongeo, moonMetereial );
+moon.position.x = -2;
+earth.add( moon );
+
+
+const neptunegeo = new THREE.SphereGeometry(1.3,30,30);
+const neptuneTexture = textureloader.load('resources/texture/neptunus.png');
+const neptuneMetereial = new THREE.MeshPhongMaterial({
+	map: neptuneTexture,
+	});
+const neptune = new THREE.Mesh( neptunegeo, neptuneMetereial );
+neptune.position.x = 10;
+sun.add( neptune );
+
+const ringgeo = new THREE.TorusGeometry(2,0.01,16,100);
+const ringTexture = textureloader.load('resources/texture/ring.png');
+const ringmaterial = new THREE.MeshPhongMaterial( { 
+	map:ringTexture,
+	});
+const ring = new THREE.Mesh( ringgeo, ringmaterial );
+ring.rotation.x = 4.5;
+neptune.add( ring );
+
+{
+	  const loader = new THREE.CubeTextureLoader();
+	  const texture = loader.load([
+	    'resources/texture/cubeMaps/px.png',
+	    'resources/texture/cubeMaps/nx.png',
+	    'resources/texture/cubeMaps/py.png',
+	    'resources/texture/cubeMaps/ny.png',
+	    'resources/texture/cubeMaps/pz.png',
+	    'resources/texture/cubeMaps/nz.png',
+	  ]);
+	  scene.background = texture;
+	}
+
+camera.position.z = 9;
+
+function animate() {
+   requestAnimationFrame( animate );
+   earth.rotation.y += 0.03;
+   moon.rotation.y += 0.01;
+   moon.rotation.x += 0.01;
+   sun.rotation.y += 0.01;
+   neptune.rotation.y += 0.01;
+   light.intensity = light.intensity > 1 ? light.intensity -=0.005:light.intensity +=0.005;
+   renderer.render( scene, camera );
+}
+animate();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
